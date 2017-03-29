@@ -1,0 +1,2 @@
+# FantasyPredictor
+typer
