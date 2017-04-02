@@ -3,14 +3,15 @@ package pl.fantasypredictor.model;
 import lombok.Data;
 
 import javax.persistence.*;
+import java.sql.Timestamp;
 
 @Entity
-@Table(name = "user", schema = "public", catalog = "typer1")
+@Table(name = "users", schema = "public", catalog = "typer")
 @Data
 public class UserEntity {
     @Id
-    @Column(name = "id")
-    private Long id;
+    @Column(name = "user_id")
+    private Long userId;
 
     @Basic
     @Column(name = "login")
@@ -19,4 +20,7 @@ public class UserEntity {
     @Basic
     @Column(name = "password")
     private String password;
+
+    private Timestamp creationDate;
+
 }
