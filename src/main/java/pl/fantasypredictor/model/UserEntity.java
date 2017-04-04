@@ -3,7 +3,7 @@ package pl.fantasypredictor.model;
 import lombok.Data;
 
 import javax.persistence.*;
-import java.sql.Timestamp;
+import java.util.Date;
 
 @Entity
 @Table(name = "users", schema = "public", catalog = "typer")
@@ -21,6 +21,13 @@ public class UserEntity {
     @Column(name = "password")
     private String password;
 
-    private Timestamp creationDate;
+    @Temporal(TemporalType.TIMESTAMP)
+    @Column(name = "creation_date")
+    private Date creationDate;
+
+    @PrePersist
+    protected void onCreate() {
+        creationDate = new Date();
+    }
 
 }

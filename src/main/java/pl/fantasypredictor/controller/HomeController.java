@@ -7,8 +7,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
-import pl.fantasypredictor.model.UserEntity;
-import pl.fantasypredictor.repository.UserRepository;
+import pl.fantasypredictor.dto.UserDto;
+import pl.fantasypredictor.service.UserService;
 
 import java.util.List;
 
@@ -16,7 +16,7 @@ import java.util.List;
 public class HomeController {
 
     @Autowired
-    private UserRepository userRepository;
+    private UserService userService;
 
     @RequestMapping("/")
     @ResponseBody
@@ -27,18 +27,18 @@ public class HomeController {
     @RequestMapping("/users")
     @ResponseBody
 
-    public List<UserEntity> getUsers() {
-        return userRepository.findAll();
+    public List<UserDto> getUsers() {
+        return userService.getUsers();
     }
 
     @RequestMapping("/add")
     @ResponseBody
-    public UserEntity addUser() {
-        UserEntity u = new UserEntity();
-        u.setId(1L);
-        u.setLogin("bm");
+    public UserDto addUser(@RequestParam(value = "id") Long id, @RequestParam(value = "login") String login) {
+        UserDto u = new UserDto();
+        u.setId(id);
+        u.setLogin(login);
         u.setPassword("pass");
-        return userRepository.saveAndFlush(u);
+        return userService.createUser(u);
     }
 
     @RequestMapping("/greeting")

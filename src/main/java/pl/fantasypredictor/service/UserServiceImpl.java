@@ -22,12 +22,14 @@ public class UserServiceImpl implements UserService {
     private UserMapper userMapper;
 
     @Override
+    @Transactional
     public UserDto createUser(UserDto userDto) {
         UserEntity userEntity = userMapper.toEntity(userDto);
         userEntity = userRepository.save(userEntity);
         return userMapper.toDto(userEntity);
     }
 
+    @Transactional(readOnly = true)
     public List<UserDto> getUsers() {
         return userMapper.toDtoList(userRepository.findAll());
     }

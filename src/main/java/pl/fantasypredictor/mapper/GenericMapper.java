@@ -1,7 +1,6 @@
 package pl.fantasypredictor.mapper;
 
 import org.modelmapper.ModelMapper;
-import org.springframework.beans.factory.annotation.Autowired;
 
 import java.util.Collection;
 import java.util.List;
@@ -9,12 +8,10 @@ import java.util.stream.Collectors;
 
 public abstract class GenericMapper<D, E> {
 
-
-    @Autowired
-    private ModelMapper modelMapper;
-
     final Class<D> dtoClass;
     final Class<E> entityClass;
+    //TODO Autowire not working
+    private ModelMapper modelMapper = new ModelMapper();
 
     public GenericMapper(Class<D> dtoClass, Class<E> entityClass) {
         this.dtoClass = dtoClass;

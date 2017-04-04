@@ -7,8 +7,8 @@ import pl.fantasypredictor.model.UserEntity;
 @Component
 public class UserMapper extends GenericMapper<UserDto, UserEntity> {
 
-    public UserMapper(Class<UserDto> dtoClass, Class<UserEntity> entityClass) {
-        super(dtoClass, entityClass);
+    public UserMapper() {
+        super(UserDto.class, UserEntity.class);
     }
 
 
