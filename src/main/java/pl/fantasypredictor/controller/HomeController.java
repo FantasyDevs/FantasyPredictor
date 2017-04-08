@@ -3,10 +3,7 @@ package pl.fantasypredictor.controller;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.*;
 import pl.fantasypredictor.dto.UserDto;
 import pl.fantasypredictor.service.UserService;
 
@@ -24,9 +21,15 @@ public class HomeController {
         return "HOme page";
     }
 
-    @RequestMapping("/users")
+    @RequestMapping("/users/{login}")
     @ResponseBody
+    public UserDto getUserByLogin(@PathVariable String login) {
+        return userService.getUserByLogin(login);
+    }
 
+
+    @RequestMapping("/users/")
+    @ResponseBody
     public List<UserDto> getUsers() {
         return userService.getUsers();
     }

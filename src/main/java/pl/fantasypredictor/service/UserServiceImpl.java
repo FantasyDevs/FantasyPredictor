@@ -29,8 +29,15 @@ public class UserServiceImpl implements UserService {
         return userMapper.toDto(userEntity);
     }
 
+    @Override
     @Transactional(readOnly = true)
     public List<UserDto> getUsers() {
         return userMapper.toDtoList(userRepository.findAll());
+    }
+
+    @Override
+    @Transactional(readOnly = true)
+    public UserDto getUserByLogin(String login) {
+        return userMapper.toDto(userRepository.findByLogin(login));
     }
 }
